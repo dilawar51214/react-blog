@@ -13,6 +13,7 @@ const Nav = () => {
             <div className="flex justify-between text-white text-[22px] w-[20%]">
                 <div className="hover:border-white border-[1px] rounded-[8px] px-2 border-[#1E7200]">
                   <ul className="">
+                  {/* This will take you to the home page where all the articles are visible */}
                     <li>
                       <Link to="/">Articles</Link>
                     </li>
@@ -21,7 +22,8 @@ const Nav = () => {
 
                 <div className="hover:border-white border-[1px] rounded-[8px] px-2 border-[#1E7200]">
                   <ul className="">
-                    
+{/* This will take you to the categories page where all categories are visible.
+ */}
                           <Link
                             to={`/category`}
                           >

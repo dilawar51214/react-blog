@@ -1,20 +1,41 @@
-import React from "react";
-// import { useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import Articles from "../../components/Articles";
-// import CATEGORY_ARTICLES_QUERY from "../../queries/category/articles";
 
 const Category = () => {
-  // let { slug } = useParams();
-  const categories ={data:[{attributes:{data:'This is Category',slug:"slug",name:'Article'}}]}
+  // SAME AS ARTICLE
 
+  const [categories,setCategories] = useState()
 
+   const getData =async() => {
+   axios.get(`${process.env.REACT_APP_API_KEY}/api/categories`).then((res)=>{
+      setCategories(res.data.data)
+    }).catch((error)=>{
+      console.log("error message",error)
+    })
+ 
+  }
+console.log(categories)
+ useEffect(() => {
+   getData()
+ }, [])
   return (
     <div>
             <div>
               <div className="uk-section">
                 <div className="uk-container uk-container-large">
-                  <h1>{categories.data[0].attributes.name}</h1>
-                  <Articles articles={categories.data[0].attributes.data} />
+                  {
+                    categories?.length && categories.map((category, index) => 
+                      <div key={index} className="mt-5">
+                           <Link to={`/category/${category.attributes.slug}`}>
+                          <p className="text-xl font-bold">Category : <span className="font-semibold">{category.attributes.name}</span></p>
+                          </Link>
+                        </div>
+                    )
+                  }
+                  {/* <h1>{categories.data[0].attributes.name}</h1> */}
+                  {/* <Articles articles={categories.data[0].attributes.data} /> */}
                 </div>
               </div>
             </div>

@@ -1,3 +1,4 @@
+// IGNORE, THIS IS ADVANCED FEATURE OF REACT 
 import { render, screen } from '@testing-library/react';
 import App from './App';
 

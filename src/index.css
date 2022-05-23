@@ -1,3 +1,7 @@
+/* IMPORT REQUIRED TAILWIND UTILITIES */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* YOU CAN WRITE CUSTOM CSS HERE */

@@ -1,15 +1,23 @@
+// Import react and use effect and use state to use in this file
 import React,{ useEffect, useState} from "react";
+// This is a blog card
  import Card from "../Cards/index";
+ // this is to get the slug from the url
 
+ import {
+    useParams
+  } from "react-router-dom";
+// SAME AS ARTICLE/INDEX.JS
 import axios from "axios";
 
 const Articles = () => {
-  // SAME AS ARTICLE/CATEGORY.JS
+  // const articles = []
+  let { slug } = useParams();
   console.log(process.env.REACT_APP_API_KEY)
   const [articles,setArticles] = useState()
 
    const getData =async() => {
-   axios.get(`${process.env.REACT_APP_API_KEY}/api/articles?populate[0]=cover&populate[1]=category`).then((res)=>{
+   axios.get(`${process.env.REACT_APP_API_KEY}/api/articles?populate[0]=cover&populate[1]=category&filters[category][slug][$eq]=${slug}`).then((res)=>{
       setArticles(res.data.data)
     }).catch((error)=>{
       console.log("error message",error)
@@ -19,15 +27,22 @@ const Articles = () => {
  useEffect(() => {
    getData()
  }, [])
+    // const leftArticlesCount = Math.ceil(articles.length / 2);
+  // const leftArticles = articles.slice(0, articles.length);
+  // const rightArticles = articles.slice(
+  //   leftArticlesCount,
+  //   articles.length
+  // )
+  console.log(articles);
   return (
       <div className="w-full flex flex-col items-center ">
         <div className="flex justify-start w-[95%] h-16 items-center">
-          <div className="flex justify-between w-[70px]">
+          <div className="flex justify-between w-[100px]">
           <svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M23 12.2679C24.3333 13.0378 24.3333 14.9622 23 15.732L3.5 26.9904C2.16666 27.7602 0.499999 26.7979 0.499999 25.2583L0.5 2.74167C0.5 1.20207 2.16667 0.239817 3.5 1.00962L23 12.2679Z" fill="black"/>
         </svg>
 
-          <p className="font-semibold text-[18px]">Blog</p>
+          <p className="font-semibold text-[18px]">{articles?.[0]?.attributes?.category?.data?.attributes?.name}</p>
           </div>
         </div>
         <div className="flex w-[90%]">

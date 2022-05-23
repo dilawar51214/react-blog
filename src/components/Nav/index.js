@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
-    const [categories,setCategories] = useState({data:[{attributes:{slug:"slug",name:'Category'}}]})
   return (
     <div className="flex justify-center bg-[#1E7200] w-full h-[100px]">
       <div className="w-[95%] px-5 flex justify-between items-center">
@@ -22,17 +21,14 @@ const Nav = () => {
 
                 <div className="hover:border-white border-[1px] rounded-[8px] px-2 border-[#1E7200]">
                   <ul className="">
-                    {categories.data.map((category) => {
-                      return (
-                        <li key={category.attributes.slug}>
+                    
                           <Link
                             to={`/category`}
                           >
-                            {category.attributes.name}
+                            "Category"
                           </Link>
-                        </li>
-                      );
-                    })}
+                      
+
                   </ul>
                 </div>
             </div>

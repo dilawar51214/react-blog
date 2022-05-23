@@ -1,11 +1,11 @@
-import React,{useState} from "react";
+import React from "react";
 // import { useParams } from "react-router";
 import Articles from "../../components/Articles";
 // import CATEGORY_ARTICLES_QUERY from "../../queries/category/articles";
 
 const Category = () => {
   // let { slug } = useParams();
-  const [categories,setCategories] = useState({data:[{attributes:{data:'This is Category',slug:"slug",name:'Article'}}]})
+  const categories ={data:[{attributes:{data:'This is Category',slug:"slug",name:'Article'}}]}
 
 
   return (

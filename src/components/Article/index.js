@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import ReactMarkdown from "react-markdown";
+import React from "react";
+// import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
 import imageUrl3 from "../../Assets/article.png"
 
@@ -7,7 +7,7 @@ import imageUrl3 from "../../Assets/article.png"
 
 const Article = () => {
 //   let { slug } = useParams();
-const [article,setArticles] = useState({attributes:{slug:"slug",description:'lit. Phasellus aliquet nibh id iaculis pharetra. Maecenas  eleifend sed ex. Donec quis magna sed felis elementum blandit nec quis sem. Maecen.',image:{url:imageUrl3},title:"My Title",published_at:"4/4/2022",author:"william"}})
+const article =[{attributes:{slug:"slug",description:'lit. Phasellus aliquet nibh id iaculis pharetra. Maecenas  eleifend sed ex. Donec quis magna sed felis elementum blandit nec quis sem. Maecen.',image:{url:imageUrl3},title:"My Title",published_at:"4/4/2022",author:"william"}}]
 
 //   return (
     // <div>

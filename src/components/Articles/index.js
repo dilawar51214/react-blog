@@ -4,9 +4,14 @@ import React,{ useEffect, useState} from "react";
 import axios from "axios";
 
 const Articles = () => {
-  // SAME AS ARTICLE/CATEGORY.JS
-  console.log(process.env.REACT_APP_API_KEY)
   const [articles,setArticles] = useState()
+    // here we use axios to get all the categories data from strapi. 
+    // populate[0] contain all the images and populate[1] contaiins all the categories.
+//axios is a library .it is use to get,post,update and delete the date from external source. 
+// here we use axios to get all articles data from strapi.
+// in .THEN we get respnse data . but if there is an error then the response fiels will empty and error shown in .CATCH .
+//  {/* // .env are environment variables , .env file is use to store secret information in variable , and access these variable by process.env.REACT_APP_VARIABLE_NAME */}
+
 
    const getData =async() => {
    axios.get(`${process.env.REACT_APP_API_KEY}/api/articles?populate[0]=cover&populate[1]=category`).then((res)=>{
@@ -16,6 +21,8 @@ const Articles = () => {
     })
  
   }
+    // this use effect runs first time when the component is rendered, and it fetches the data.
+
  useEffect(() => {
    getData()
  }, [])
@@ -32,7 +39,8 @@ const Articles = () => {
         </div>
         <div className="flex w-[90%]">
           <div className="flex justify-evenly flex-wrap w-full">
-          {articles && articles.map((article) => {
+{/*we store axios response data in details , that is in array form . here we use map() function on that array to get all the value one by one */}
+                        {articles && articles.map((article) => {
             return (
               <Card
                 article={article}
@@ -42,25 +50,6 @@ const Articles = () => {
           })}
           </div>
         </div>
-          {/* {leftArticles.map((article) => {
-            return (
-              <Card
-                article={article}
-                key={`article__${article.attributes.slug}`}
-              />
-            );
-          })}
-        </div>
-        <div>
-          <div className="uk-child-width-1-2@m uk-grid-match" data-uk-grid>
-            {rightArticles.map((article) => {
-              return (
-                <Card
-                  article={article}
-                  key={`article__${article.attributes.slug}`}
-                />
-              );
-            })} */}
           </div>
     
   );

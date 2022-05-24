@@ -17,6 +17,7 @@ const Card = (props) => {
           <p className="text-[14px]">Update :<span className="text-[14px] ml-2"><Moment format="MMM Do YYYY">
             {article.attributes.updatedAt}
           </Moment></span></p>
+          {/* moment is use to show the date and formate the date  */}
           <Moment format="MMM Do YYYY" className="text-[14px]">
             {article.attributes.publishedAt}
           </Moment>
@@ -31,6 +32,8 @@ const Card = (props) => {
         </div>
         
         <div className="flex justify-between p-3">
+          {/* Link is use to redirect the user to next page . in TO = {} you have to pass the url of the next page .  */}
+          {/* inside the Link we use a p tag . when someone click on the category it redirect the user to next page  */}
         <Link to={`/category/${article.attributes.category.data.attributes.slug}`}>
           <p>Category : <span className="font-semibold">{article.attributes.category.data.attributes.name}</span></p>
           </Link>

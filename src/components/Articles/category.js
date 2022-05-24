@@ -15,24 +15,32 @@ const Articles = () => {
   let { slug } = useParams();
   console.log(process.env.REACT_APP_API_KEY)
   const [articles,setArticles] = useState()
+// this function is used to fetch data from strapi using axios.
+// populate is used to include related fields in the api response.
+//axios is a library .it is use to get,post,update and delete the date from external source. 
+// here we use axios to get single article data from strapi. for this we use filters in axios to get only selected data .
+// in .THEN we get respnse data . but if there is an error then the response fiels will empty and error shown in .CATCH .
+// in populate[0] we store all images . cover is the name of image in strapi , in populate we store all the categories. 
+//  {/* // .env are environment variables , .env file is use to store secret information in variable , and access these variable by process.env.REACT_APP_VARIABLE_NAME */}
 
    const getData =async() => {
    axios.get(`${process.env.REACT_APP_API_KEY}/api/articles?populate[0]=cover&populate[1]=category&filters[category][slug][$eq]=${slug}`).then((res)=>{
-      setArticles(res.data.data)
+    //  store the strapi api data into articles using setArticle() function
+    setArticles(res.data.data)
     }).catch((error)=>{
       console.log("error message",error)
     })
  
   }
+    // this use effect runs first time when the component is rendered, and it fetches the data.
+    // slug is the dependency of useEffect . whenever the value of slug change , useEffect run and also run the getData() function.
+    // we can add any dependency in useeffect depending on requirements . 
  useEffect(() => {
    getData()
- }, [])
-    // const leftArticlesCount = Math.ceil(articles.length / 2);
-  // const leftArticles = articles.slice(0, articles.length);
-  // const rightArticles = articles.slice(
-  //   leftArticlesCount,
-  //   articles.length
-  // )
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, [slug])
+ 
+  
   console.log(articles);
   return (
       <div className="w-full flex flex-col items-center ">
@@ -47,8 +55,10 @@ const Articles = () => {
         </div>
         <div className="flex w-[90%]">
           <div className="flex justify-evenly flex-wrap w-full">
+            {/*we store axios response data in articles , that is in array form . here we use map() function on that array to get all the value one by one */}
           {articles && articles.map((article) => {
             return (
+         // here we use Card component and pass the article values one by one to that card .
               <Card
                 article={article}
                 key={`article__${article.attributes.slug}`}
@@ -57,25 +67,6 @@ const Articles = () => {
           })}
           </div>
         </div>
-          {/* {leftArticles.map((article) => {
-            return (
-              <Card
-                article={article}
-                key={`article__${article.attributes.slug}`}
-              />
-            );
-          })}
-        </div>
-        <div>
-          <div className="uk-child-width-1-2@m uk-grid-match" data-uk-grid>
-            {rightArticles.map((article) => {
-              return (
-                <Card
-                  article={article}
-                  key={`article__${article.attributes.slug}`}
-                />
-              );
-            })} */}
           </div>
     
   );
